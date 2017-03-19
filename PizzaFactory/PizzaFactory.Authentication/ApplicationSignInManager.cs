@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using PizzaFactory.Data.Models;
 using System.Security.Claims;
 using System.Threading.Tasks;
 

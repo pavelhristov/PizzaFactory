@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PizzaFactory.WebClient.Models;
 using PizzaFactory.Authentication;
+using PizzaFactory.Data.Models;
 
 namespace PizzaFactory.WebClient.Controllers
 {

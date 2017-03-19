@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace PizzaFactory.Authentication
+namespace PizzaFactory.Data.Models
 {
     public class ApplicationUser : IdentityUser
     {

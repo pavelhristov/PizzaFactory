@@ -250,6 +250,10 @@
       <Project>{db1adea7-9ae2-4708-869c-0dc091360785}</Project>
       <Name>PizzaFactory.Authentication</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PizzaFactory.Data\PizzaFactory.Data.csproj">
+      <Project>{dc476cd3-51cc-45b6-b71a-beb62291e028}</Project>
+      <Name>PizzaFactory.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
