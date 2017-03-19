@@ -168,11 +168,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PizzaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PizzaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +235,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Pizza\Choice.cshtml" />
+    <Content Include="Views\Pizza\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -253,6 +257,10 @@
     <ProjectReference Include="..\PizzaFactory.Data\PizzaFactory.Data.csproj">
       <Project>{dc476cd3-51cc-45b6-b71a-beb62291e028}</Project>
       <Name>PizzaFactory.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PizzaFactory.Service\PizzaFactory.Service.csproj">
+      <Project>{b812a380-0805-4c27-bf80-a82cc1f6ae93}</Project>
+      <Name>PizzaFactory.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
