@@ -12,11 +12,10 @@ namespace PizzaFactory.WebClient.Controllers
     public class PizzaController : Controller
     {
         private IPizzaService pizzaService;
-
-        public PizzaController()
+        
+        public PizzaController(IPizzaService pizzaService)
         {
-            this.pizzaService = new PizzaService();
-
+            this.pizzaService = pizzaService;
         }
         
         [AllowAnonymous]

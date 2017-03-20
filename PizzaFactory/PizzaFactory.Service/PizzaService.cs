@@ -10,9 +10,9 @@ namespace PizzaFactory.Service
     {
         private IPizzaFactoryDbContext pizzaContext;
 
-        public PizzaService()
+        public PizzaService(IPizzaFactoryDbContext pizzaContext)
         {
-            this.pizzaContext = new PizzaFactoryDbContext();
+            this.pizzaContext = pizzaContext;
         }
 
         public IQueryable<Pizza> GetAll()
