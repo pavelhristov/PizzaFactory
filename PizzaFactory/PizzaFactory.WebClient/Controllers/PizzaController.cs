@@ -1,5 +1,7 @@
-﻿using PizzaFactory.Service;
+﻿using Bytes2you.Validation;
+using PizzaFactory.Service;
 using PizzaFactory.Service.Contracts;
+using PizzaFactory.WebClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +17,29 @@ namespace PizzaFactory.WebClient.Controllers
         
         public PizzaController(IPizzaService pizzaService)
         {
+            Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
+
             this.pizzaService = pizzaService;
         }
         
         [AllowAnonymous]
         public ActionResult Choice()
         {
+            var pizzaModels = new List<PizzaViewModel>();
             var pizzas = this.pizzaService.GetAll().ToList();
-            return View(pizzas);
+
+            // TODO: move to factory or automapper or expression or whatever
+            foreach (var item in pizzas)
+            {
+                pizzaModels.Add(
+                new PizzaViewModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name
+                });
+            }
+
+            return View(pizzaModels);
         }
 
         [HttpGet]
@@ -34,6 +51,8 @@ namespace PizzaFactory.WebClient.Controllers
         [HttpPost]
         public ActionResult Create(string Name)
         {
+            this.pizzaService.Create(Name);
+            
             return Redirect("~/Pizza/Choice");
         }
     }
