@@ -258,6 +258,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Pizza\Choice.cshtml" />
     <Content Include="Views\Pizza\Create.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PizzaViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

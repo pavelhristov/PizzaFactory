@@ -1,0 +1,16 @@
+﻿@model PizzaFactory.WebClient.Models.PizzaViewModel
+
+<div class="media list-item-container">
+    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+        <a href="#">
+            <img class="media-object list-item-img" src="@Model.ImgUrl" alt="image">
+        </a>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-7 col-xs-7">
+        <h3 class="media-heading"><a href="#">@Model.Name</a></h3>
+        <p>@Model.Description</p>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1">
+        <p class="item-price">@Model.Price lv.</p>
+    </div>
+</div>

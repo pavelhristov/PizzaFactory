@@ -30,7 +30,7 @@ namespace PizzaFactory.Service
                 return null;
             }
 
-            return this.pizzaContext.Pizzas.Where(p => p.Id == id).First();
+            return this.pizzaContext.Pizzas.Find(id);
         }
 
         public int Create(string name)

@@ -35,7 +35,10 @@ namespace PizzaFactory.WebClient.Controllers
                 new PizzaViewModel()
                 {
                     Id = item.Id,
-                    Name = item.Name
+                    Name = item.Name,
+                    Description = item.Description,
+                    Price = item.Price,
+                    ImgUrl = item.ImgUrl
                 });
             }
 

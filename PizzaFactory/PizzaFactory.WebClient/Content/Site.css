@@ -22,3 +22,27 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Custom styles*/
+.list-item-img {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 150px;
+    min-width: 50px;
+}
+
+.list-item-container {
+    border-radius: 10px;
+    background-color: #eeeeee;
+    padding: 5px;
+    border: 1px solid #ffffff;
+}
+
+    .list-item-container:hover {
+        background-color: #dddddd;
+        border: 1px solid grey;
+    }
+
+.item-price {
+    font-style: italic;
+}

@@ -13,5 +13,14 @@ namespace PizzaFactory.WebClient.Models
 
         [Required]
         public Guid Id { get; set; }
+
+        [Required]
+        public string ImgUrl { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
+
+        [Required]
+        public string Description { get; set; }
     }
 }
