@@ -26,7 +26,7 @@ namespace PizzaFactory.WebClient.Controllers
         public ActionResult Choice()
         {
             var pizzaModels = new List<PizzaViewModel>();
-            var pizzas = this.pizzaService.GetAll().ToList();
+            var pizzas = this.pizzaService.GetAll();
 
             // TODO: move to factory or automapper or expression or whatever
             foreach (var item in pizzas)
@@ -54,7 +54,7 @@ namespace PizzaFactory.WebClient.Controllers
         [HttpPost]
         public ActionResult Create(string Name)
         {
-            this.pizzaService.Create(Name);
+            //this.pizzaService.Create(Name);
             
             return Redirect("~/Pizza/Choice");
         }

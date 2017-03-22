@@ -4,6 +4,8 @@ using PizzaFactory.Data.Models;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.Data;
 using Bytes2you.Validation;
+using PizzaFactory.Service.Models;
+using System.Collections.Generic;
 
 namespace PizzaFactory.Service
 {
@@ -18,30 +20,20 @@ namespace PizzaFactory.Service
             this.pizzaContext = pizzaContext;
         }
 
-        public IQueryable<Pizza> GetAll()
+        public IEnumerable<PizzaModel> GetAll()
         {
-            return this.pizzaContext.Pizzas;
+            return this.pizzaContext.Pizzas.ToList().Select(p=> new PizzaModel(p));
         }
 
-        public Pizza GetById(Guid? id)
+        public PizzaModel GetById(Guid? id)
         {
             if (id == null)
             {
                 return null;
             }
 
-            return this.pizzaContext.Pizzas.Find(id);
-        }
-
-        public int Create(string name)
-        {
-            Pizza pizza = new Pizza()
-            {
-                Name = name
-            };
-
-            this.pizzaContext.Pizzas.Add(pizza);
-            return this.pizzaContext.SaveChanges();
+            var pizza = this.pizzaContext.Pizzas.Find(id);
+            return new PizzaModel(pizza);
         }
     }
 }

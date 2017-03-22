@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IPizzaService.cs" />
+    <Compile Include="Models\PizzaModel.cs" />
     <Compile Include="PizzaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,15 +1,14 @@
-﻿using PizzaFactory.Data.Models;
+﻿using PizzaFactory.Service.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PizzaFactory.Service.Contracts
 {
     public interface IPizzaService
     {
-        IQueryable<Pizza> GetAll();
+        IEnumerable<PizzaModel> GetAll();
 
-        Pizza GetById(Guid? id);
-
-        int Create(string name);
+        PizzaModel GetById(Guid? id);
     }
 }

@@ -1,5 +1,6 @@
 namespace PizzaFactory.Data.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,6 +28,104 @@ namespace PizzaFactory.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            if (!context.Pizzas.Any())
+            {
+                var pizza1 = new Pizza()
+                {
+                    Name = "Margarita",
+                    ImgUrl = "https://qph.ec.quoracdn.net/main-qimg-311ad5650cf27f9a806ada70a21a2678-c",
+                    Description = "It is not a flower!",
+                    Price = 4.50M
+                };
+
+                var pizza2 = new Pizza()
+                {
+                    Name = "Napoli",
+                    ImgUrl = "http://www.napolipizzaastoria.com/images/104827009.jpg.jpg",
+                    Description = "Big Pizza!",
+                    Price = 5.50M
+                };
+
+                var pizza3 = new Pizza()
+                {
+                    Name = "Pizza Cake",
+                    ImgUrl = "https://d12xickik43a9a.cloudfront.net/images/magazine/de/M29069-Pizza-Cake-Q85-375.jpg",
+                    Description = "Does not exist in real life.",
+                    Price = 15.50M
+                };
+
+                context.Pizzas.Add(pizza1);
+                context.Pizzas.Add(pizza2);
+                context.Pizzas.Add(pizza3);
+            }
+
+
+            if (!context.Ingredients.Any())
+            {
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Cheese",
+                    Price = 0.80M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Chicken fillet",
+                    Price = 1.30M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Tomatoes",
+                    Price = 0.50M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Pineapple",
+                    Price = 0.60M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Olives",
+                    Price = 0.40M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Pickles",
+                    Price = 0.80M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Philadelphia cream",
+                    Price = 0.90M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Ham",
+                    Price = 1.00M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Tuna fish",
+                    Price = 1.50M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
+                    Name = "Sausage",
+                    Price = 1.10M
+                });
+            }
+
+
+            context.SaveChanges();
         }
     }
 }
