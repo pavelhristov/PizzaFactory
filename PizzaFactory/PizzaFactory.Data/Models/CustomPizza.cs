@@ -6,11 +6,11 @@ namespace PizzaFactory.Data.Models
 {
     public class CustomPizza
     {
-        private ICollection<IngredientWithQuantity> ingredients;
+        private ICollection<Ingredient> ingredients;
 
         public CustomPizza()
         {
-            this.ingredients = new HashSet<IngredientWithQuantity>();
+            this.ingredients = new HashSet<Ingredient>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,7 +22,7 @@ namespace PizzaFactory.Data.Models
 
         public decimal Price { get; set; }
 
-        public virtual ICollection<IngredientWithQuantity> Ingredients
+        public virtual ICollection<Ingredient> Ingredients
         {
             get
             {

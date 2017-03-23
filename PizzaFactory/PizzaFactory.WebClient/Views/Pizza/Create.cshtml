@@ -1,4 +1,4 @@
-﻿@model PizzaFactory.WebClient.Models.CustomPizzaViewModel
+﻿@model PizzaFactory.WebClient.Models.CreateCustomPizzaViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -50,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Choice")
+    @Html.ActionLink("Back to List", "Choice", new { }, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

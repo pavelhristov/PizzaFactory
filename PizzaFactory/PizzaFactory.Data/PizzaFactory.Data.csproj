@@ -63,10 +63,7 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\CustomPizza.cs" />
     <Compile Include="Models\Ingredient.cs" />
-    <Compile Include="Models\IngredientWithQuantity.cs" />
     <Compile Include="Models\Pizza.cs" />
-    <Compile Include="Models\Enums\QuantityType.cs" />
-    <Compile Include="Models\Quantity.cs" />
     <Compile Include="PizzaFactoryDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

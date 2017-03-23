@@ -1,15 +1,12 @@
-﻿using PizzaFactory.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
 
 namespace PizzaFactory.WebClient.Models
 {
-    public class CustomPizzaViewModel
+    public class CreateCustomPizzaViewModel
     {
-        public CustomPizzaViewModel()
+        public CreateCustomPizzaViewModel()
         {
             Ingredients = new List<Guid>();
         }
@@ -20,5 +17,16 @@ namespace PizzaFactory.WebClient.Models
         public string Description { get; set; }
         
         public ICollection<Guid> Ingredients { get; set; }
+    }
+
+    public class ListCustomPizzaViewModel
+    {
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public string Ingredients { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

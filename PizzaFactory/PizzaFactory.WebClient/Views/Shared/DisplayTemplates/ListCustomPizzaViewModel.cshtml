@@ -1,0 +1,12 @@
+﻿@model PizzaFactory.WebClient.Models.ListCustomPizzaViewModel
+
+<div class="media list-item-container">
+    <div class="col-lg-11 col-md-11 col-sm-10 col-xs-10">
+        <h3 class="media-heading"><a href="#">@Model.Name</a></h3>
+        <p>@Model.Description</p>
+        <p>@Model.Ingredients</p>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1">
+        <p class="item-price">@Model.Price lv.</p>
+    </div>
+</div>

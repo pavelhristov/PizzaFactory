@@ -1,10 +1,5 @@
 ﻿using PizzaFactory.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzaFactory.Data
 {
@@ -15,7 +10,5 @@ namespace PizzaFactory.Data
         IDbSet<CustomPizza> CustomPizzas { get; }
 
         IDbSet<Ingredient> Ingredients { get; }
-
-        IDbSet<Quantity> Quantities { get; }
     }
 }

@@ -1,17 +1,17 @@
-﻿@model IEnumerable<PizzaFactory.WebClient.Models.PizzaViewModel>
+﻿@model IEnumerable<PizzaFactory.WebClient.Models.ListCustomPizzaViewModel>
 
 @{
-    ViewBag.Title = "Choice";
+    ViewBag.Title = "View";
 }
 
-<h2>Choice Pizza</h2>
+<h2>Choice Custom Pizza</h2>
 
 <p>
     @if (Request.IsAuthenticated)
     {
         @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-default" })
     }
-    @Html.ActionLink("Custom Pizzas", "Custom", new { }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Our Pizzas", "Choice", new { }, new { @class = "btn btn-default" })
 </p>
 
 
@@ -24,3 +24,4 @@
         </div>
     }
 </div>
+

@@ -1,6 +1,7 @@
 ﻿using Bytes2you.Validation;
 using PizzaFactory.Service;
 using PizzaFactory.Service.Contracts;
+using PizzaFactory.Service.Models;
 using PizzaFactory.WebClient.Models;
 using System;
 using System.Collections.Generic;
@@ -10,20 +11,23 @@ using System.Web.Mvc;
 
 namespace PizzaFactory.WebClient.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class PizzaController : Controller
     {
         private IPizzaService pizzaService;
         private IIngredientService ingredientService;
+        private ICustomPizzaService customPizzaService;
 
 
-        public PizzaController(IPizzaService pizzaService, IIngredientService ingredientService)
+        public PizzaController(IPizzaService pizzaService, IIngredientService ingredientService, ICustomPizzaService customPizzaService)
         {
             Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
             Guard.WhenArgument(ingredientService, nameof(ingredientService)).IsNull().Throw();
+            Guard.WhenArgument(customPizzaService, nameof(customPizzaService)).IsNull().Throw();
 
             this.ingredientService = ingredientService;
             this.pizzaService = pizzaService;
+            this.customPizzaService = customPizzaService;
         }
 
         [AllowAnonymous]
@@ -59,11 +63,36 @@ namespace PizzaFactory.WebClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CustomPizzaViewModel pizza)
+        public ActionResult Create(CreateCustomPizzaViewModel pizza)
         {
-            //this.pizzaService.Create(Name);
+            this.customPizzaService.Create(new CreateCustomPizzaModel()
+            {
+                Name = pizza.Name,
+                Description = pizza.Description,
+                Ingredients = pizza.Ingredients
+            });
 
             return Redirect("~/Pizza/Choice");
+        }
+
+        [HttpGet]
+        public ActionResult Custom()
+        {
+            var pizzas = this.customPizzaService.GetAll();
+            var pizzaList = new List<ListCustomPizzaViewModel>();
+
+            foreach (var item in pizzas)
+            {
+                pizzaList.Add(new ListCustomPizzaViewModel()
+                {
+                    Name = item.Name,
+                    Description = item.Description,
+                    Ingredients = string.Join(", ", item.Ingredients.Select(i => i.Name).ToList()),
+                    Price = item.Price
+                });
+            }
+
+            return this.View(pizzaList);
         }
     }
 }

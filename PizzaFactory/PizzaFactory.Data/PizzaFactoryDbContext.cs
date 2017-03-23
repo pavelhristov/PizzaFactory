@@ -18,12 +18,7 @@ namespace PizzaFactory.Data
         public IDbSet<Ingredient> Ingredients { get; set; }
 
         public IDbSet<Pizza> Pizzas { get; set; }
-
-        public IDbSet<Quantity> Quantities { get; set; }
-
-        public IDbSet<IngredientWithQuantity> IngredientWithQuantity { get; set; }
-
-
+        
         public static PizzaFactoryDbContext Create()
         {
             return new PizzaFactoryDbContext();

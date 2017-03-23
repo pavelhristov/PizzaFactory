@@ -22,5 +22,15 @@ namespace PizzaFactory.Service
         {
             return this.pizzaContext.Ingredients;
         }
+
+        public Ingredient GetById(Guid? Id)
+        {
+            if (!Id.HasValue)
+            {
+                return null;
+            }
+
+            return this.pizzaContext.Ingredients.Find(Id);
+        }
     }
 }
