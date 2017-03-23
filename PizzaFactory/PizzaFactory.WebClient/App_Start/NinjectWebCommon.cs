@@ -65,6 +65,8 @@ namespace PizzaFactory.WebClient.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IPizzaService>().To<PizzaService>();
+            kernel.Bind<IIngredientService>().To<IngredientService>();
+            kernel.Bind<ICustomPizzaService>().To<CustomPizzaService>();
             kernel.Bind<IPizzaFactoryDbContext>().To<PizzaFactoryDbContext>();
         }        
     }

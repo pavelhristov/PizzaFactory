@@ -194,6 +194,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomPizzaViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PizzaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -259,6 +260,7 @@
     <Content Include="Views\Pizza\Choice.cshtml" />
     <Content Include="Views\Pizza\Create.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PizzaViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\IngredientWithQuantityViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

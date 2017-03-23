@@ -14,14 +14,18 @@ namespace PizzaFactory.WebClient.Controllers
     public class PizzaController : Controller
     {
         private IPizzaService pizzaService;
-        
-        public PizzaController(IPizzaService pizzaService)
+        private IIngredientService ingredientService;
+
+
+        public PizzaController(IPizzaService pizzaService, IIngredientService ingredientService)
         {
             Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
+            Guard.WhenArgument(ingredientService, nameof(ingredientService)).IsNull().Throw();
 
+            this.ingredientService = ingredientService;
             this.pizzaService = pizzaService;
         }
-        
+
         [AllowAnonymous]
         public ActionResult Choice()
         {
@@ -48,14 +52,17 @@ namespace PizzaFactory.WebClient.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            var ingredients = this.ingredientService.GetAll().ToList();
+            ViewBag.Items = new SelectList(ingredients, "ID", "Name");
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(string Name)
+        public ActionResult Create(CustomPizzaViewModel pizza)
         {
             //this.pizzaService.Create(Name);
-            
+
             return Redirect("~/Pizza/Choice");
         }
     }

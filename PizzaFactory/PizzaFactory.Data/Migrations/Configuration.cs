@@ -65,6 +65,12 @@ namespace PizzaFactory.Data.Migrations
             {
                 context.Ingredients.Add(new Ingredient()
                 {
+                    Name = "none",
+                    Price = 0.00M
+                });
+
+                context.Ingredients.Add(new Ingredient()
+                {
                     Name = "Cheese",
                     Price = 0.80M
                 });

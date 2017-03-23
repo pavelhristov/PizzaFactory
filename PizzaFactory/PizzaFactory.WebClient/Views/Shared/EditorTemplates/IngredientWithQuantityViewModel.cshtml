@@ -1,0 +1,13 @@
+﻿@model PizzaFactory.WebClient.Models.IngredientViewModel
+
+<div class="form-group">
+    @Html.LabelFor(m => m, new { @class = "col-md-3 control-label" })
+    <div class="col-md-9">
+        @Html.DropDownListFor(m => m, (SelectList)ViewBag.Items, new { @class = "form-control" })
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
