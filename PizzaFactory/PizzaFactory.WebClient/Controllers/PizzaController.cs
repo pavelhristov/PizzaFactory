@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace PizzaFactory.WebClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class PizzaController : Controller
     {
         private IPizzaService pizzaService;
@@ -76,6 +76,7 @@ namespace PizzaFactory.WebClient.Controllers
             return Redirect("~/Pizza/Choice");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Custom(int page = 1, int pageSize = 10)
         {
@@ -114,6 +115,19 @@ namespace PizzaFactory.WebClient.Controllers
             var model = new StaticPagedList<ListCustomPizzaViewModel>(pizzaList, page, pageSize, count);
 
             return this.View(model);
+        }
+
+        [AllowAnonymous]
+        [ChildActionOnly]
+        [HttpGet]
+        public PartialViewResult CreatePizza()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return this.PartialView();
+            }
+
+            return null;
         }
     }
 }

@@ -272,6 +272,7 @@
     <Content Include="Views\Shared\EditorTemplates\IngredientWithQuantityViewModel.cshtml" />
     <Content Include="Views\Pizza\Custom.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ListCustomPizzaViewModel.cshtml" />
+    <Content Include="Views\Pizza\CreatePizza.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
