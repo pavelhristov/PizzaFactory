@@ -1,4 +1,5 @@
 ﻿using Bytes2you.Validation;
+using PagedList;
 using PizzaFactory.Service;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.Service.Models;
@@ -76,9 +77,26 @@ namespace PizzaFactory.WebClient.Controllers
         }
 
         [HttpGet]
-        public ActionResult Custom()
+        public ActionResult Custom(int page = 1, int pageSize = 10)
         {
-            var pizzas = this.customPizzaService.GetAll();
+            if (pageSize > 10)
+            {
+                pageSize = 10;
+            }
+
+            if (pageSize < 1)
+            {
+                pageSize = 1;
+            }
+
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            int count;
+
+            var pizzas = this.customPizzaService.GetAllWithPaging(out count, page, pageSize, cp => cp.Price);
             var pizzaList = new List<ListCustomPizzaViewModel>();
 
             foreach (var item in pizzas)
@@ -92,7 +110,10 @@ namespace PizzaFactory.WebClient.Controllers
                 });
             }
 
-            return this.View(pizzaList);
+            //var model = pizzaList.ToPagedList(page, pageSize);
+            var model = new StaticPagedList<ListCustomPizzaViewModel>(pizzaList, page, pageSize, count);
+
+            return this.View(model);
         }
     }
 }

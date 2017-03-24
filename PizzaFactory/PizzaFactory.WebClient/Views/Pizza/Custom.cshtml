@@ -1,8 +1,13 @@
-﻿@model IEnumerable<PizzaFactory.WebClient.Models.ListCustomPizzaViewModel>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<PizzaFactory.WebClient.Models.ListCustomPizzaViewModel>
 
 @{
     ViewBag.Title = "View";
 }
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <h2>Choice Custom Pizza</h2>
 
@@ -23,5 +28,11 @@
             @Html.DisplayFor(modelItem => item)
         </div>
     }
+</div>
+
+<div>
+    <div class="center">
+        @Html.PagedListPager(Model, page=>Url.Action("Custom", new {page, pageSize = Model.PageSize} ))
+    </div>
 </div>
 

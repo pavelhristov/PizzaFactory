@@ -1,4 +1,6 @@
-﻿using PizzaFactory.Service.Models;
+﻿using PizzaFactory.Data.Models;
+using PizzaFactory.Service.Models;
+using System;
 using System.Collections.Generic;
 
 namespace PizzaFactory.Service.Contracts
@@ -7,6 +9,8 @@ namespace PizzaFactory.Service.Contracts
     {
         int Create(CreateCustomPizzaModel pizza);
 
-        IEnumerable<CustomPizzaModel> GetAll(int take = 5, int page = 0);
+        IEnumerable<CustomPizzaModel> GetAll();
+
+        IEnumerable<CustomPizzaModel> GetAllWithPaging(out int count, int page = 1, int size = 10, Func<CustomPizza, object> sortBy = null);
     }
 }
