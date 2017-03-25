@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,26 +16,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href='@Url.Action("Index", "Home")' class="navbar-brand">
-                    <img height="20" src='@Url.Content("http://static.tumblr.com/a68b985e8a946aed8ac054acf44b27ff/d6qr5sm/77zogar2g/tumblr_static_95bppto8wmww8k4s48wogkgs4.gif")' />
-                    Pizza Home
-                </a>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Our Pizzas", "Choice", new { area = "", controller = "Pizza" })</li>
-                    <li>@Html.ActionLink("Custom Pizzas", "Custom", new { area = "", controller = "Pizza" })</li>
-                    <li>@Html.ActionLink("About", "About", new { area = "", controller = "Home" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", new { area = "", controller = "Home" })</li>
-                    @{ if (User.IsInRole("Admin"))
-                        {
-                            <li>@Html.ActionLink("Administration", "Index", new { area = "Administration", controller = "Orders" })</li>
-                        }}
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

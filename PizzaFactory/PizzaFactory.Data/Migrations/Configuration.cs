@@ -1,5 +1,7 @@
 namespace PizzaFactory.Data.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
     using System.Data.Entity;
@@ -128,6 +130,24 @@ namespace PizzaFactory.Data.Migrations
                     Name = "Sausage",
                     Price = 1.10M
                 });
+            }
+
+            if (!context.Roles.Any())
+            {
+                // Create admin role
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole() { Name = "Admin" };
+                roleManager.Create(role);
+
+                // Create admin user
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var user = new ApplicationUser { UserName = "admin@pizza.com", Email = "admin@pizza.com" };
+                userManager.Create(user, "12345q");
+
+                // Assign user to admin role
+                userManager.AddToRole(user.Id, "Admin");
             }
 
 
