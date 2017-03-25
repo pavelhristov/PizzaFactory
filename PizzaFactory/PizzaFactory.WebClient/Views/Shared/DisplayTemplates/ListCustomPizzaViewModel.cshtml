@@ -8,5 +8,10 @@
     </div>
     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1">
         <p class="item-price">@Model.Price lv.</p>
+        @{ if (User.Identity.IsAuthenticated)
+            {
+                <a onclick="addToCart('@Model.Id');" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+            }
+        }
     </div>
 </div>

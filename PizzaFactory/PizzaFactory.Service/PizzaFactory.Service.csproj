@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationUserService.cs" />
+    <Compile Include="Contracts\IApplicationUserService.cs" />
     <Compile Include="Contracts\ICustomPizzaService.cs" />
     <Compile Include="Contracts\IIngredientService.cs" />
     <Compile Include="Contracts\IPizzaService.cs" />

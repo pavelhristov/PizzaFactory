@@ -28,5 +28,7 @@ namespace PizzaFactory.WebClient.Models
         public string Ingredients { get; set; }
 
         public decimal Price { get; set; }
+
+        public Guid Id { get; set; }
     }
 }

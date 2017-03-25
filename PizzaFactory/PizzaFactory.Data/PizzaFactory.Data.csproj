@@ -57,10 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IIdentityDbContext.cs" />
     <Compile Include="IPizzaFactoryDbContext.cs" />
     <Compile Include="IBaseDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\BasePizza.cs" />
     <Compile Include="Models\CustomPizza.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Pizza.cs" />
