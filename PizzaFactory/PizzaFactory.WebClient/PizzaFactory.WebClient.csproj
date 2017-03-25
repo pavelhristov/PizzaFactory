@@ -202,10 +202,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PizzaController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BasePizzaViewModel.cs" />
     <Compile Include="Models\CustomPizzaViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PizzaViewModel.cs" />
@@ -287,6 +289,8 @@
     <Content Include="Views\Pizza\Custom.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ListCustomPizzaViewModel.cshtml" />
     <Content Include="Views\Pizza\CreatePizza.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BasePizzaViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

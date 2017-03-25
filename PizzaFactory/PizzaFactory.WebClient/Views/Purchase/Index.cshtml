@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PizzaFactory.WebClient.Models.BasePizzaViewModel>
+
+
+@{
+    decimal totalPrice = 0M;
+}
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<h2>Shopping Cart</h2>
+
+<div class="container">
+    <ul class="list-group col-md-4">
+        @{ foreach (var item in Model)
+            {
+                <li class="list-group-item clearfix">
+                    @Html.DisplayFor(m => item)
+                </li>
+                    totalPrice += item.Price;
+
+                }
+        }
+    </ul>
+</div>
+
+<div>
+    <p><strong>Total price: </strong><i>@Html.DisplayFor(m => totalPrice) лв.</i></p>
+</div>
+
+<div>
+    <a onclick="confirmPurchase()" class="btn btn-primary">Purchase</a>
+</div>
+
+<script type="text/javascript">
+    function confirmPurchase() {
+        $.getJSON(`ConfirmOrder?address=${'random address'}`, "", function (data) {
+            console.log(data);
+            if (data.success) {
+                toastr.success(data.message)
+            }
+            else {
+                toastr.warning(data.message)
+            }
+
+        });
+    }
+</script>

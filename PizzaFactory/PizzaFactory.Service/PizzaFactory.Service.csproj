@@ -68,6 +68,7 @@
     <Compile Include="Contracts\IPizzaService.cs" />
     <Compile Include="CustomPizzaService.cs" />
     <Compile Include="IngredientService.cs" />
+    <Compile Include="Models\BasePizzaModel.cs" />
     <Compile Include="Models\CustomPizzaModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Models\PizzaModel.cs" />

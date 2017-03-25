@@ -32,6 +32,10 @@
                         {
                             <li>@Html.ActionLink("Administration", "Index", new { area = "Administration", controller = "Orders" })</li>
                         }
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Shopping Cart", "Index", new { area = "", controller = "Purchase" })</li>
+                        }
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
