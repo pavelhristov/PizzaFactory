@@ -31,7 +31,8 @@
                     @{ if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Administration", "Index", new { area = "Administration", controller = "Orders" })</li>
-                        }}
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
