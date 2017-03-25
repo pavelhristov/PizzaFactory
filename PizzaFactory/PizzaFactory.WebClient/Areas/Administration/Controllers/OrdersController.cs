@@ -1,8 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using PizzaFactory.WebClient.Attributes;
+using System.Web.Mvc;
 
 namespace PizzaFactory.WebClient.Areas.Administration.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [CustomAuthorize(Roles = "Admin")]
     public class OrdersController : Controller
     {
         // GET: Administration/Orders
