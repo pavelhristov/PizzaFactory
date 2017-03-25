@@ -11,11 +11,13 @@ namespace PizzaFactory.Service
     {
         private IIdentityDbContext userContext;
         private IPizzaFactoryDbContext pizzaContext;
+        private IOrderDbContext orderContext;
 
-        public ApplicationUserService(IIdentityDbContext userContext, IPizzaFactoryDbContext pizzaContext)
+        public ApplicationUserService(IIdentityDbContext userContext, IPizzaFactoryDbContext pizzaContext, IOrderDbContext orderContext)
         {
             this.userContext = userContext;
             this.pizzaContext = pizzaContext;
+            this.orderContext = orderContext;
         }
 
         public int AddToCart(string userId, Guid productId)
@@ -65,7 +67,20 @@ namespace PizzaFactory.Service
 
         public int ConfirmOrder(string userId, string address)
         {
-            throw new NotImplementedException();
+            ApplicationUser user = this.userContext.Users.Find(userId);
+            Order order = new Order()
+            {
+                Address = address,
+                Customer = user,
+                Pizzas = user.Cart
+            };
+
+            this.orderContext.Orders.Add(order);
+
+            user.Cart = new List<BasePizza>();
+
+
+            return this.orderContext.SaveChanges();
         }
     }
 }

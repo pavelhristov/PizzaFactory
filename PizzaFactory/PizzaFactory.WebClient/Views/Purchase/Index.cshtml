@@ -34,10 +34,15 @@
 
 <script type="text/javascript">
     function confirmPurchase() {
-        $.getJSON(`ConfirmOrder?address=${'random address'}`, "", function (data) {
+        console.log('purchasing!')
+        $.getJSON(`purchase/ConfirmOrder?address=${'random address'}`, "", function (data) {
             console.log(data);
             if (data.success) {
                 toastr.success(data.message)
+
+                setTimeout(() => {
+                    document.location.href = "/";
+                },3000)
             }
             else {
                 toastr.warning(data.message)

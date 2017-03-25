@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace PizzaFactory.WebClient.Models
+﻿namespace PizzaFactory.WebClient.Models
 {
     public class BasePizzaViewModel
     {

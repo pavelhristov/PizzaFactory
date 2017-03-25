@@ -68,7 +68,7 @@ namespace PizzaFactory.WebClient.App_Start
             kernel.Bind<IIngredientService>().To<IngredientService>();
             kernel.Bind<ICustomPizzaService>().To<CustomPizzaService>();
             kernel.Bind<IApplicationUserService>().To<ApplicationUserService>();
-            kernel.Bind<IBaseDbContext, IPizzaFactoryDbContext, IIdentityDbContext>()
+            kernel.Bind<IBaseDbContext, IPizzaFactoryDbContext, IIdentityDbContext, IOrderDbContext>()
                 .To<PizzaFactoryDbContext>().InRequestScope();
         }
     }

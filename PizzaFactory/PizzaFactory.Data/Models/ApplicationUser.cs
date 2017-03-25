@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,9 +9,11 @@ namespace PizzaFactory.Data.Models
     public class ApplicationUser : IdentityUser
     {
         private ICollection<BasePizza> cart;
+        private ICollection<Order> orders;
 
         public ApplicationUser()
         {
+            this.orders = new HashSet<Order>();
             this.cart = new List<BasePizza>();
         }
 
@@ -33,6 +34,19 @@ namespace PizzaFactory.Data.Models
             set
             {
                 this.cart = value;
+            }
+        }
+
+        public virtual ICollection<Order> Orders
+        {
+            get
+            {
+                return orders;
+            }
+
+            set
+            {
+                orders = value;
             }
         }
     }
