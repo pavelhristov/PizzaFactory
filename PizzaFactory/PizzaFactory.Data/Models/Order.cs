@@ -30,6 +30,8 @@ namespace PizzaFactory.Data.Models
             }
         }
 
+        public DateTime CreatedOn { get; set; }
+
         public string Address { get; set; }
     }
 }

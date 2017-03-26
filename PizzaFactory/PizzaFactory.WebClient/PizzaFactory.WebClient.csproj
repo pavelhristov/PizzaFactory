@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Administration\Models\OrderViewModel.cs" />
     <Compile Include="Attributes\CustomAuthorize.cs" />
     <Compile Include="Controllers\NotFoundController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -231,6 +232,7 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\OrderViewModel.cshtml" />
     <None Include="Properties\PublishProfiles\LocalFileSystem.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -294,7 +296,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

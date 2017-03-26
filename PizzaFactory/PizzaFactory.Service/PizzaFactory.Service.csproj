@@ -71,6 +71,7 @@
     <Compile Include="Models\BasePizzaModel.cs" />
     <Compile Include="Models\CustomPizzaModel.cs" />
     <Compile Include="Models\IngredientModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PizzaModel.cs" />
     <Compile Include="PizzaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

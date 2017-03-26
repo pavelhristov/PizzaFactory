@@ -1,0 +1,17 @@
+﻿@model PizzaFactory.WebClient.Areas.Administration.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "OrderViewModel";
+}
+
+<div>
+    @Html.DisplayFor(model => model.User)
+    @Html.DisplayFor(model => model.Price)
+    @Html.DisplayFor(model => model.CreatedOn)
+    @Html.DisplayFor(model => model.Address)
+    @{ foreach (var item in Model.Pizzas)
+            {
+            @Html.DisplayFor(m => item)
+        }
+    }
+</div>

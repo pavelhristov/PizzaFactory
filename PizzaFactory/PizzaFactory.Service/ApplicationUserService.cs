@@ -74,7 +74,8 @@ namespace PizzaFactory.Service
             {
                 Address = address,
                 Customer = user,
-                Pizzas = user.Cart
+                Pizzas = user.Cart,
+                CreatedOn = DateTime.Now
             };
 
             this.orderContext.Orders.Add(order);
@@ -97,6 +98,69 @@ namespace PizzaFactory.Service
             }
 
             return this.userContext.SaveChanges();
+        }
+
+        public IEnumerable<OrderModel> GetAllOrdersWithPaging(out int count, int page = 1, int size = 10, Func<Order, object> sortBy = null)
+        {
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            if (size < 1)
+            {
+                size = 1;
+            }
+
+            if (size > 10)
+            {
+                size = 10;
+            }
+
+            if (sortBy == null)
+            {
+                sortBy = cp => cp.CreatedOn;
+            }
+
+
+            var orders = this.orderContext.Orders.OrderByDescending(sortBy).Skip(size * (page - 1)).Take(size).ToList();
+            var orderModels = new List<OrderModel>();
+
+            foreach (var item in orders)
+            {
+                var pizzaList = new List<string>();
+                decimal price = 0M;
+
+                foreach (var pizza in item.Pizzas)
+                {
+                    if (pizza.CustomPizza != null)
+                    {
+                        pizzaList.Add(pizza.CustomPizza.Name);
+                        price = pizza.CustomPizza.Price;
+                    }
+                    else if (pizza.OurPizza != null)
+                    {
+                        pizzaList.Add(pizza.OurPizza.Name);
+                        price = pizza.OurPizza.Price;
+                    }
+                }
+
+                var orderModel = new OrderModel()
+                {
+                    Id = item.Id,
+                    Address = item.Address,
+                    CreatedOn = item.CreatedOn,
+                    Pizzas = pizzaList,
+                    Price = price,
+                    User = item.Customer.Email
+                };
+
+                orderModels.Add(orderModel);
+            }
+
+
+            count = orderContext.Orders.Count();
+            return orderModels;
         }
     }
 }
