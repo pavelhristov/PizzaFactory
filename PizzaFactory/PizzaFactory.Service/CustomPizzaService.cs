@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using PizzaFactory.Service.Helpers;
+using Bytes2you.Validation;
 
 namespace PizzaFactory.Service
 {
@@ -17,6 +18,10 @@ namespace PizzaFactory.Service
 
         public CustomPizzaService(IPizzaFactoryDbContext pizzaContext, IMapper mapper, IValidator validator)
         {
+            Guard.WhenArgument(pizzaContext, nameof(pizzaContext)).IsNull().Throw();
+            Guard.WhenArgument(mapper, nameof(mapper)).IsNull().Throw();
+            Guard.WhenArgument(validator, nameof(validator)).IsNull().Throw();
+
             this.pizzaContext = pizzaContext;
             this.mapper = mapper;
             this.validator = validator;

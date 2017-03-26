@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using PizzaFactory.Data;
 using PizzaFactory.Service.Models;
 using System.Linq;
+using Bytes2you.Validation;
 
 namespace PizzaFactory.Service
 {
@@ -13,6 +14,8 @@ namespace PizzaFactory.Service
 
         public IngredientService(IPizzaFactoryDbContext pizzaContext)
         {
+            Guard.WhenArgument(pizzaContext, nameof(pizzaContext)).IsNull().Throw();
+
             this.pizzaContext = pizzaContext;
         }
 

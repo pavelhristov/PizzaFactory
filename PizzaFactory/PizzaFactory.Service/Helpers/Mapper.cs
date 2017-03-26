@@ -4,8 +4,6 @@ using PizzaFactory.Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzaFactory.Service.Helpers
 {
@@ -54,6 +52,17 @@ namespace PizzaFactory.Service.Helpers
             }
 
             return customPizzaModels;
+        }
+
+        public BasePizza FromPizzaAndCustomPizza(Pizza pizza, CustomPizza customPizza)
+        {
+            BasePizza basePizza = new BasePizza()
+            {
+                CustomPizza = customPizza,
+                OurPizza = pizza
+            };
+
+            return basePizza;
         }
     }
 }

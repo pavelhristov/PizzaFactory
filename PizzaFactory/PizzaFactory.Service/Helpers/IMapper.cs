@@ -9,5 +9,7 @@ namespace PizzaFactory.Service.Helpers
     {
         CustomPizza FromCreateCustomPizzaModel(IPizzaFactoryDbContext pizzaContext, CreateCustomPizzaModel customPizzaModel);
         ICollection<CustomPizzaModel> FromCustomPizzas(ICollection<CustomPizza> pizzas);
+
+        BasePizza FromPizzaAndCustomPizza(Pizza pizza, CustomPizza customPizza);
     }
 }

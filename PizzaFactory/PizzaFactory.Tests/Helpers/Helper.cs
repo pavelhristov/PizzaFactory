@@ -15,6 +15,7 @@ namespace PizzaFactory.Tests.Helpers
             {
                 new Pizza()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Margarita",
                     ImgUrl = "https://qph.ec.quoracdn.net/main-qimg-311ad5650cf27f9a806ada70a21a2678-c",
                     Description = "It is not a flower!",
@@ -23,6 +24,7 @@ namespace PizzaFactory.Tests.Helpers
 
                 new Pizza()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Napoli",
                     ImgUrl = "http://www.napolipizzaastoria.com/images/104827009.jpg.jpg",
                     Description = "Big Pizza!",
@@ -31,6 +33,7 @@ namespace PizzaFactory.Tests.Helpers
 
                 new Pizza()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Pizza Cake",
                     ImgUrl = "https://d12xickik43a9a.cloudfront.net/images/magazine/de/M29069-Pizza-Cake-Q85-375.jpg",
                     Description = "Does not exist in real life.",
@@ -45,6 +48,7 @@ namespace PizzaFactory.Tests.Helpers
             {
                 new CustomPizza()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "3",
                     Description = "bla",
                     Ingredients = new List<Ingredient>()
@@ -58,6 +62,7 @@ namespace PizzaFactory.Tests.Helpers
                 },
                 new CustomPizza()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "1",
                     Description = "blabla",
                     Ingredients = new List<Ingredient>()
@@ -76,6 +81,7 @@ namespace PizzaFactory.Tests.Helpers
                 },
                 new CustomPizza()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "5",
                     Description = "even more bla",
                     Ingredients = new List<Ingredient>()
