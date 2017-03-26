@@ -67,6 +67,10 @@
     <Compile Include="Contracts\IIngredientService.cs" />
     <Compile Include="Contracts\IPizzaService.cs" />
     <Compile Include="CustomPizzaService.cs" />
+    <Compile Include="Helpers\IMapper.cs" />
+    <Compile Include="Helpers\IValidator.cs" />
+    <Compile Include="Helpers\Mapper.cs" />
+    <Compile Include="Helpers\Validator.cs" />
     <Compile Include="IngredientService.cs" />
     <Compile Include="Models\BasePizzaModel.cs" />
     <Compile Include="Models\CustomPizzaModel.cs" />

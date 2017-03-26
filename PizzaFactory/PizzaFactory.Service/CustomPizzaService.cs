@@ -5,80 +5,56 @@ using PizzaFactory.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using PizzaFactory.Service.Helpers;
 
 namespace PizzaFactory.Service
 {
     public class CustomPizzaService : ICustomPizzaService
     {
+        private IMapper mapper;
         private IPizzaFactoryDbContext pizzaContext;
+        private IValidator validator;
 
-        public CustomPizzaService(IPizzaFactoryDbContext pizzaContext)
+        public CustomPizzaService(IPizzaFactoryDbContext pizzaContext, IMapper mapper, IValidator validator)
         {
             this.pizzaContext = pizzaContext;
+            this.mapper = mapper;
+            this.validator = validator;
         }
 
         public int Create(CreateCustomPizzaModel customPizzaModel)
         {
-            var ingredients = new List<Ingredient>();
-            decimal price = 2.00M;
+            var pizza = this.mapper.FromCreateCustomPizzaModel(this.pizzaContext, customPizzaModel);
 
-            foreach (var item in customPizzaModel.Ingredients)
-            {
-                var ingredient = this.pizzaContext.Ingredients.Find(item);
-                if (ingredient.Name != "none")
-                {
-                    ingredients.Add(ingredient);
-                }
-
-                price += ingredient.Price;
-            }
-
-            this.pizzaContext.CustomPizzas.Add(new CustomPizza()
-            {
-                Name = customPizzaModel.Name,
-                Description = customPizzaModel.Description,
-                Ingredients = ingredients,
-                Price = price
-            });
+            this.pizzaContext.CustomPizzas.Add(pizza);
 
             return this.pizzaContext.SaveChanges();
         }
 
-        public IEnumerable<CustomPizzaModel> GetAll()
-        {
-            var pizzas = this.pizzaContext.CustomPizzas.ToList();
-            var customPizzaModels = new List<CustomPizzaModel>();
+        // DEPRECATED
+        //public IEnumerable<CustomPizzaModel> GetAll()
+        //{
+        //    var pizzas = this.pizzaContext.CustomPizzas.ToList();
+        //    var customPizzaModels = new List<CustomPizzaModel>();
 
-            foreach (var item in pizzas)
-            {
-                customPizzaModels.Add(new CustomPizzaModel()
-                {
-                    Name = item.Name,
-                    Price = item.Price,
-                    Ingredients = item.Ingredients.Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price }).ToList(),
-                    Description = item.Description
-                });
-            }
+        //    foreach (var item in pizzas)
+        //    {
+        //        customPizzaModels.Add(new CustomPizzaModel()
+        //        {
+        //            Name = item.Name,
+        //            Price = item.Price,
+        //            Ingredients = item.Ingredients.Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price }).ToList(),
+        //            Description = item.Description
+        //        });
+        //    }
 
-            return customPizzaModels;
-        }
+        //    return customPizzaModels;
+        //}
 
         public IEnumerable<CustomPizzaModel> GetAllWithPaging(out int count, int page = 1, int size = 10, Func<CustomPizza, object> sortBy = null)
         {
-            if (page < 1)
-            {
-                page = 1;
-            }
-
-            if (size < 1)
-            {
-                size = 1;
-            }
-
-            if (size > 10)
-            {
-                size = 10;
-            }
+            page = validator.ValidatePage(page);
+            size = validator.ValidatePageSize(size);
 
             if (sortBy == null)
             {
@@ -86,19 +62,7 @@ namespace PizzaFactory.Service
             }
 
             var pizzas = this.pizzaContext.CustomPizzas.OrderBy(sortBy).Skip(size * (page - 1)).Take(size).ToList();
-            var customPizzaModels = new List<CustomPizzaModel>();
-
-            foreach (var item in pizzas)
-            {
-                customPizzaModels.Add(new CustomPizzaModel()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Price = item.Price,
-                    Ingredients = item.Ingredients.Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price }).ToList(),
-                    Description = item.Description
-                });
-            }
+            var customPizzaModels = this.mapper.FromCustomPizzas(pizzas);
 
             count = this.pizzaContext.CustomPizzas.Count();
 

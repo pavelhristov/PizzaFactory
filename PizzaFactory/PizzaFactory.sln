@@ -19,10 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaFactory.Service", "PizzaFactory.Service\PizzaFactory.Service.csproj", "{B812A380-0805-4C27-BF80-A82CC1F6AE93}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{76F5A804-0806-45A7-981E-6B13E8047A00}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaFactory.Utils", "PizzaFactory.Utils\PizzaFactory.Utils.csproj", "{71F3BCF0-3C90-448E-AC4E-CE4FAA4AC62B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,10 +45,6 @@ Global
 		{B812A380-0805-4C27-BF80-A82CC1F6AE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B812A380-0805-4C27-BF80-A82CC1F6AE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B812A380-0805-4C27-BF80-A82CC1F6AE93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71F3BCF0-3C90-448E-AC4E-CE4FAA4AC62B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71F3BCF0-3C90-448E-AC4E-CE4FAA4AC62B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71F3BCF0-3C90-448E-AC4E-CE4FAA4AC62B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71F3BCF0-3C90-448E-AC4E-CE4FAA4AC62B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +53,5 @@ Global
 		{DB1ADEA7-9AE2-4708-869C-0DC091360785} = {181ED0D2-AAB4-4D73-B4FA-BBB9E2D1B4FD}
 		{DC476CD3-51CC-45B6-B71A-BEB62291E028} = {565B4F72-FF71-4E33-BA47-8925EB895288}
 		{B812A380-0805-4C27-BF80-A82CC1F6AE93} = {FDB07581-BA47-4F29-928C-644BF8ED1C78}
-		{71F3BCF0-3C90-448E-AC4E-CE4FAA4AC62B} = {76F5A804-0806-45A7-981E-6B13E8047A00}
 	EndGlobalSection
 EndGlobal

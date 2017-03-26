@@ -39,6 +39,62 @@ namespace PizzaFactory.Tests.Helpers
             };
         }
 
+        public static IEnumerable<CustomPizza> GetCustomPizzas()
+        {
+            return new List<CustomPizza>()
+            {
+                new CustomPizza()
+                {
+                    Name = "3",
+                    Description = "bla",
+                    Ingredients = new List<Ingredient>()
+                    {
+                        new Ingredient()
+                        {
+                            Name = "banana",
+                            Price = 3M
+                        }
+                    }
+                },
+                new CustomPizza()
+                {
+                    Name = "1",
+                    Description = "blabla",
+                    Ingredients = new List<Ingredient>()
+                    {
+                        new Ingredient()
+                        {
+                            Name = "tangerine",
+                            Price = 3M
+                        },
+                        new Ingredient()
+                        {
+                            Name = "Pepsi",
+                            Price = 2.45M
+                        }
+                    }
+                },
+                new CustomPizza()
+                {
+                    Name = "5",
+                    Description = "even more bla",
+                    Ingredients = new List<Ingredient>()
+                    {
+                        new Ingredient()
+                        {
+                            Name = "broccoli",
+                            Price = 5M
+                        },
+                        new Ingredient()
+                        {
+                            Name = "unknown thing",
+                            Price = 9.99M
+                        }
+                    }
+                }
+            };
+        }
+
         public static IEnumerable<Ingredient> GetIngredients()
         {
             return new List<Ingredient>()
