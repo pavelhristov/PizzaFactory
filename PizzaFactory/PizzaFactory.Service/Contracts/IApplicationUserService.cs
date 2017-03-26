@@ -8,6 +8,8 @@ namespace PizzaFactory.Service.Contracts
     {
         int AddToCart(string userId, Guid productId);
 
+        int RemoveFromCart(string userId, Guid productId);
+
         IEnumerable<BasePizzaModel> UserCart(string userId);
 
         int ConfirmOrder(string userId, string address);

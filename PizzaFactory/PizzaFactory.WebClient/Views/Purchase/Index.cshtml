@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<PizzaFactory.WebClient.Models.BasePizzaViewModel>
 
-
 @{
     decimal totalPrice = 0M;
 }
@@ -10,23 +9,27 @@
 
 <h2>Shopping Cart</h2>
 
-<div class="container">
-    <ul class="list-group col-md-4">
-        @{ foreach (var item in Model)
+<div class="container" id="content-container">
+    <div class="row">
+        <ul class="list-group col-md-4 col-lg-4 col-sm-8 col-xs-12">
+            @{ foreach (var item in Model)
             {
-                <li class="list-group-item clearfix">
-                    @Html.DisplayFor(m => item)
-                </li>
+                    <li class="list-group-item clearfix">
+                        @Html.DisplayFor(m => item)
+                    </li>
                     totalPrice += item.Price;
 
                 }
-        }
-    </ul>
+            }
+        </ul>
+    </div>
+
+    <div class="row">
+        <p><strong>Total price: </strong><i>@Html.DisplayFor(m => totalPrice) лв.</i></p>
+    </div>
 </div>
 
-<div>
-    <p><strong>Total price: </strong><i>@Html.DisplayFor(m => totalPrice) лв.</i></p>
-</div>
+
 
 <div>
     <a onclick="confirmPurchase()" class="btn btn-primary">Purchase</a>
@@ -34,7 +37,9 @@
 
 <script type="text/javascript">
     function confirmPurchase() {
-        console.log('purchasing!')
+        toastr.info("Oreder sent!");
+        $("#content-container").html("");
+
         $.getJSON(`purchase/ConfirmOrder?address=${'random address'}`, "", function (data) {
             console.log(data);
             if (data.success) {
@@ -42,10 +47,37 @@
 
                 setTimeout(() => {
                     document.location.href = "/";
-                },3000)
+                },2000)
             }
             else {
                 toastr.warning(data.message)
+
+                setTimeout(() => {
+                    document.location.href = "/purchase";
+                }, 2000)
+            }
+
+        });
+    }
+
+    function removeFromCart(productId) {
+        toastr.info("Removing Product!");
+
+        $.getJSON(`purchase/RemoveFromCart?productId=${productId}`, "", function (data) {
+            console.log(data);
+            if (data.success) {
+                toastr.success(data.message)
+
+                setTimeout(() => {
+                    document.location.href = "/purchase";
+                }, 1000)
+            }
+            else {
+                toastr.warning(data.message)
+
+                setTimeout(() => {
+                    document.location.href = "/purchase";
+                }, 2000)
             }
 
         });

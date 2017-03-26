@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.WebClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -29,6 +30,7 @@ namespace PizzaFactory.WebClient.Controllers
             {
                 pizzaModelList.Add(new BasePizzaViewModel()
                 {
+                    Id = item.Id,
                     Name = item.Name,
                     Price = item.Price
                 });
@@ -59,6 +61,29 @@ namespace PizzaFactory.WebClient.Controllers
                 return Json(new { message = "Order failed", success = false }, JsonRequestBehavior.AllowGet);
             }
             
+        }
+
+        public JsonResult RemoveFromCart(string productId)
+        {
+            string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+
+
+            int isSaved = 0;
+
+            Task responseTask = Task.Run(() =>
+            {
+                isSaved = this.userService.RemoveFromCart(userId, Guid.Parse(productId));
+            });
+            responseTask.Wait();
+
+            if (isSaved > 0)
+            {
+                return Json(new { message = "Successfully removed from cart!", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { message = "Product can not be removed!", success = false }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using PizzaFactory.Data.Models;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.Service.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace PizzaFactory.Service
@@ -47,6 +48,7 @@ namespace PizzaFactory.Service
             foreach (var item in user.Cart)
             {
                 var pizza = new BasePizzaModel();
+                pizza.Id = item.Id;
 
                 if (item.CustomPizza != null)
                 {
@@ -81,6 +83,20 @@ namespace PizzaFactory.Service
 
 
             return this.orderContext.SaveChanges();
+        }
+
+        public int RemoveFromCart(string userId, Guid productId)
+        {
+            var user = this.userContext.Users.Find(userId);
+
+            var pizza = user.Cart.FirstOrDefault(p => p.Id == productId);
+
+            if (pizza != null)
+            {
+                user.Cart.Remove(pizza);
+            }
+
+            return this.userContext.SaveChanges();
         }
     }
 }

@@ -6,4 +6,5 @@
     <div class="pull-right">
         <i>@Html.DisplayFor(model => model.Price) лв.</i>
     </div>
+    <div class="pull-right"><a class="btn btn-danger" onclick="removeFromCart('@Model.Id')"><span class="glyphicon glyphicon-remove"></span></a></div>
 </div>
