@@ -1,5 +1,4 @@
-﻿using PizzaFactory.Data.Models;
-using PizzaFactory.Service.Models;
+﻿using PizzaFactory.Service.Models;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +8,6 @@ namespace PizzaFactory.Service.Contracts
     {
         IEnumerable<IngredientModel> GetAll();
 
-        IngredientModel GetById(Guid? Id);
+        //IngredientModel GetById(Guid Id);
     }
 }

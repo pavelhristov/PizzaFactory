@@ -26,8 +26,8 @@ namespace PizzaFactory.Tests.Services.PizzaServiceTests
             // Arrange
             var pizzas = Helper.GetPizzas();
             var contextMock = new Mock<IPizzaFactoryDbContext>();
-            var superheroDbSetMock = QueryableDbSetMock.GetQueryableMockDbSet(pizzas);
-            contextMock.Setup(ctx => ctx.Pizzas).Returns(superheroDbSetMock.Object);
+            var pizzaDbSetMock = QueryableDbSetMock.GetQueryableMockDbSet(pizzas);
+            contextMock.Setup(ctx => ctx.Pizzas).Returns(pizzaDbSetMock.Object);
             IPizzaService pizzaService = new PizzaService(contextMock.Object);
 
             // Act
@@ -36,15 +36,15 @@ namespace PizzaFactory.Tests.Services.PizzaServiceTests
             // Assert
             Assert.IsInstanceOfType(pizzasFound, typeof(IEnumerable<PizzaModel>));
         }
-        
+
         [TestMethod]
         public void ReturnAllPizzas_WhenCalled()
         {
             // Arrange
             var pizzas = Helper.GetPizzas();
             var contextMock = new Mock<IPizzaFactoryDbContext>();
-            var superheroDbSetMock = QueryableDbSetMock.GetQueryableMockDbSet(pizzas);
-            contextMock.Setup(ctx => ctx.Pizzas).Returns(superheroDbSetMock.Object);
+            var pizzaDbSetMock = QueryableDbSetMock.GetQueryableMockDbSet(pizzas);
+            contextMock.Setup(ctx => ctx.Pizzas).Returns(pizzaDbSetMock.Object);
             IPizzaService pizzaService = new PizzaService(contextMock.Object);
 
             // Act

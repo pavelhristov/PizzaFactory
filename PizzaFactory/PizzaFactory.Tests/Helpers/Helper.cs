@@ -37,7 +37,33 @@ namespace PizzaFactory.Tests.Helpers
                     Price = 15.50M
                 }
             };
+        }
 
+        public static IEnumerable<Ingredient> GetIngredients()
+        {
+            return new List<Ingredient>()
+            {
+                new Ingredient()
+                {
+                    Name = "none",
+                    Price = 0.00M
+                },
+                new Ingredient()
+                {
+                    Name = "Cheese",
+                    Price = 0.80M
+                },
+                new Ingredient()
+                {
+                    Name = "Chicken fillet",
+                    Price = 1.30M
+                },
+                new Ingredient()
+                {
+                    Name = "Tomatoes",
+                    Price = 0.50M
+                }
+            };
         }
     }
 }

@@ -25,15 +25,15 @@ namespace PizzaFactory.Service
             return this.pizzaContext.Pizzas.ToList().Select(p=> new PizzaModel(p));
         }
 
-        public PizzaModel GetById(Guid? id)
-        {
-            if (id == null)
-            {
-                return null;
-            }
+        //public PizzaModel GetById(Guid id)
+        //{
+        //    if (id == Guid.Empty)
+        //    {
+        //        return null;
+        //    }
 
-            var pizza = this.pizzaContext.Pizzas.Find(id);
-            return new PizzaModel(pizza);
-        }
+        //    var pizza = this.pizzaContext.Pizzas.Find(id);
+        //    return new PizzaModel(pizza);
+        //}
     }
 }

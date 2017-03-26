@@ -1,7 +1,6 @@
 ﻿using PizzaFactory.Service.Contracts;
 using System;
 using System.Collections.Generic;
-using PizzaFactory.Data.Models;
 using PizzaFactory.Data;
 using PizzaFactory.Service.Models;
 using System.Linq;
@@ -22,22 +21,22 @@ namespace PizzaFactory.Service
             return this.pizzaContext.Ingredients.ToList().Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price });
         }
 
-        public IngredientModel GetById(Guid? Id)
-        {
-            if (!Id.HasValue)
-            {
-                return null;
-            }
+        //public IngredientModel GetById(Guid Id)
+        //{
+        //    if (Id != Guid.Empty)
+        //    {
+        //        return null;
+        //    }
 
-            var ingredient = this.pizzaContext.Ingredients.Find(Id);
-            var ingredientModel = new IngredientModel()
-            {
-                Id = ingredient.Id,
-                Name = ingredient.Name,
-                Price = ingredient.Price
-            };
+        //    var ingredient = this.pizzaContext.Ingredients.Find(Id);
+        //    var ingredientModel = new IngredientModel()
+        //    {
+        //        Id = ingredient.Id,
+        //        Name = ingredient.Name,
+        //        Price = ingredient.Price
+        //    };
 
-            return ingredientModel;
-        }
+        //    return ingredientModel;
+        //}
     }
 }

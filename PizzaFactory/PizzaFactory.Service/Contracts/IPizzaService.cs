@@ -1,7 +1,6 @@
 ﻿using PizzaFactory.Service.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PizzaFactory.Service.Contracts
 {
@@ -9,6 +8,6 @@ namespace PizzaFactory.Service.Contracts
     {
         IEnumerable<PizzaModel> GetAll();
 
-        PizzaModel GetById(Guid? id);
+        //PizzaModel GetById(Guid id);
     }
 }
