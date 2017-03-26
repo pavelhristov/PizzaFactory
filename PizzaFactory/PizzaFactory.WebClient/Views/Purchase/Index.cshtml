@@ -27,6 +27,9 @@
     <div class="row">
         <p><strong>Total price: </strong><i>@Html.DisplayFor(m => totalPrice) лв.</i></p>
     </div>
+
+    <input type="text" id="input-address" placeholder="Delivery addresss" />
+
 </div>
 
 
@@ -37,27 +40,33 @@
 
 <script type="text/javascript">
     function confirmPurchase() {
-        toastr.info("Oreder sent!");
-        $("#content-container").html("");
+        let deliveryAddress = $("#input-address").val();
 
-        $.getJSON(`purchase/ConfirmOrder?address=${'random address'}`, "", function (data) {
-            console.log(data);
-            if (data.success) {
-                toastr.success(data.message)
+        if (deliveryAddress.length < 1) {
+            toastr.warning("Address is required!")
+        } else {
+            toastr.info("Oreder sent!");
+            $("#content-container").html("");
 
-                setTimeout(() => {
-                    document.location.href = "/";
-                },2000)
-            }
-            else {
-                toastr.warning(data.message)
+            $.getJSON(`purchase/ConfirmOrder?address=${deliveryAddress}`, "", function (data) {
+                console.log(data);
+                if (data.success) {
+                    toastr.success(data.message)
 
-                setTimeout(() => {
-                    document.location.href = "/purchase";
-                }, 2000)
-            }
+                    setTimeout(() => {
+                        document.location.href = "/";
+                    }, 2000)
+                }
+                else {
+                    toastr.warning(data.message)
 
-        });
+                    setTimeout(() => {
+                        document.location.href = "/purchase";
+                    }, 2000)
+                }
+
+            });
+        }
     }
 
     function removeFromCart(productId) {
