@@ -92,6 +92,7 @@ namespace PizzaFactory.Service
             {
                 customPizzaModels.Add(new CustomPizzaModel()
                 {
+                    Id = item.Id,
                     Name = item.Name,
                     Price = item.Price,
                     Ingredients = item.Ingredients.Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price }).ToList(),

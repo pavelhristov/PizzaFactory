@@ -33,3 +33,18 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    function addToCart(productId) {
+        $.getJSON(`AddToCart?productId=${productId}`, "", function (data) {
+            console.log(data);
+            if (data.success) {
+                toastr.success(data.message)
+            }
+            else {
+                toastr.warning(data.message)
+            }
+
+        });
+    }
+</script>
+
