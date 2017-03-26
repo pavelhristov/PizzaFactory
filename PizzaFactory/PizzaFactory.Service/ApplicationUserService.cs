@@ -136,12 +136,12 @@ namespace PizzaFactory.Service
                     if (pizza.CustomPizza != null)
                     {
                         pizzaList.Add(pizza.CustomPizza.Name);
-                        price = pizza.CustomPizza.Price;
+                        price += pizza.CustomPizza.Price;
                     }
                     else if (pizza.OurPizza != null)
                     {
                         pizzaList.Add(pizza.OurPizza.Name);
-                        price = pizza.OurPizza.Price;
+                        price += pizza.OurPizza.Price;
                     }
                 }
 

@@ -8,7 +8,7 @@ namespace PizzaFactory.WebClient.Attributes
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             filterContext.Result = new RedirectToRouteResult(new
-                RouteValueDictionary(new { area = "", controller = "NotFound" }));
+                RouteValueDictionary(new { area = "", controller = "Error" }));
         }
     }
 }

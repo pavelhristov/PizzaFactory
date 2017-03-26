@@ -2,7 +2,7 @@
 
 namespace PizzaFactory.WebClient.Controllers
 {
-    public class NotFoundController : Controller
+    public class ErrorController : Controller
     {
         // GET: AccessDenied
         public ActionResult Index()
