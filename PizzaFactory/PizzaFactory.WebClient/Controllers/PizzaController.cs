@@ -6,6 +6,7 @@ using PizzaFactory.Authentication;
 using PizzaFactory.Service;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.Service.Models;
+using PizzaFactory.WebClient.Helpers.Contracts;
 using PizzaFactory.WebClient.Models;
 using System;
 using System.Collections.Generic;
@@ -24,18 +25,21 @@ namespace PizzaFactory.WebClient.Controllers
         private IIngredientService ingredientService;
         private ICustomPizzaService customPizzaService;
         private IApplicationUserService userService;
+        private ICacheProvider cacheProvider;
 
-        public PizzaController(IPizzaService pizzaService, IIngredientService ingredientService, ICustomPizzaService customPizzaService, IApplicationUserService userService)
+        public PizzaController(IPizzaService pizzaService, IIngredientService ingredientService, ICustomPizzaService customPizzaService, IApplicationUserService userService, ICacheProvider cacheProvider)
         {
             Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
             Guard.WhenArgument(ingredientService, nameof(ingredientService)).IsNull().Throw();
             Guard.WhenArgument(customPizzaService, nameof(customPizzaService)).IsNull().Throw();
             Guard.WhenArgument(userService, nameof(userService)).IsNull().Throw();
+            Guard.WhenArgument(cacheProvider, nameof(cacheProvider)).IsNull().Throw();
 
             this.ingredientService = ingredientService;
             this.pizzaService = pizzaService;
             this.customPizzaService = customPizzaService;
             this.userService = userService;
+            this.cacheProvider = cacheProvider;
         }
 
         [AllowAnonymous]
@@ -64,7 +68,16 @@ namespace PizzaFactory.WebClient.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var ingredients = this.ingredientService.GetAll().ToList();
+            string ingredientsKey = "ingredients";
+
+            var ingredients = this.cacheProvider.GetItem(ingredientsKey) as IEnumerable<IngredientModel>;
+
+            if (ingredients == null || ingredients.Count() <= 0)
+            {
+                ingredients = this.ingredientService.GetAll();
+                this.cacheProvider.SetItem(ingredientsKey, ingredients);
+            }
+
             ViewBag.Items = new SelectList(ingredients, "ID", "Name");
 
             return View();
@@ -167,7 +180,7 @@ namespace PizzaFactory.WebClient.Controllers
 
             responseTask.Wait();
 
-            if (isSaved>0)
+            if (isSaved > 0)
             {
                 return this.Json(new { message = "Successfully added to cart.", success = true }, JsonRequestBehavior.AllowGet);
             }

@@ -13,6 +13,8 @@ namespace PizzaFactory.WebClient.App_Start
     using Service.Contracts;
     using Service;
     using Data;
+    using Helpers.Contracts;
+    using Helpers;
 
     public static class NinjectWebCommon
     {
@@ -64,6 +66,7 @@ namespace PizzaFactory.WebClient.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<ICacheProvider>().To<CacheProvider>().InRequestScope();
             kernel.Bind<IPizzaService>().To<PizzaService>();
             kernel.Bind<IIngredientService>().To<IngredientService>();
             kernel.Bind<ICustomPizzaService>().To<CustomPizzaService>();

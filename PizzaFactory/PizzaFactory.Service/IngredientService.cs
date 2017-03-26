@@ -1,11 +1,10 @@
 ﻿using PizzaFactory.Service.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PizzaFactory.Data.Models;
 using PizzaFactory.Data;
+using PizzaFactory.Service.Models;
+using System.Linq;
 
 namespace PizzaFactory.Service
 {
@@ -18,19 +17,27 @@ namespace PizzaFactory.Service
             this.pizzaContext = pizzaContext;
         }
 
-        public IQueryable<Ingredient> GetAll()
+        public IEnumerable<IngredientModel> GetAll()
         {
-            return this.pizzaContext.Ingredients;
+            return this.pizzaContext.Ingredients.ToList().Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price });
         }
 
-        public Ingredient GetById(Guid? Id)
+        public IngredientModel GetById(Guid? Id)
         {
             if (!Id.HasValue)
             {
                 return null;
             }
 
-            return this.pizzaContext.Ingredients.Find(Id);
+            var ingredient = this.pizzaContext.Ingredients.Find(Id);
+            var ingredientModel = new IngredientModel()
+            {
+                Id = ingredient.Id,
+                Name = ingredient.Name,
+                Price = ingredient.Price
+            };
+
+            return ingredientModel;
         }
     }
 }
