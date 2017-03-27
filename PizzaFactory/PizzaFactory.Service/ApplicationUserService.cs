@@ -89,7 +89,6 @@ namespace PizzaFactory.Service
 
             user.Cart = new List<BasePizza>();
 
-
             return this.orderContext.SaveChanges();
         }
 

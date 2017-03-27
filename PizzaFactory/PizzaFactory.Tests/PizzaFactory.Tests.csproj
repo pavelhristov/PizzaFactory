@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Services\ApplicationUserServiceTests\AddToCart_Should.cs" />
+    <Compile Include="Services\ApplicationUserServiceTests\ConfirmOrder_Should.cs" />
     <Compile Include="Services\ApplicationUserServiceTests\GetAllOrdersWithPaging_Should.cs" />
     <Compile Include="Services\ApplicationUserServiceTests\RemoveFromCart_Should.cs" />
     <Compile Include="Services\CustomPizzaServiceTests\Create_Should.cs" />
