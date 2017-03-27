@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Bytes2you.Validation;
+using PagedList;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.WebClient.Areas.Administration.Models;
 using PizzaFactory.WebClient.Attributes;
@@ -14,6 +15,8 @@ namespace PizzaFactory.WebClient.Areas.Administration.Controllers
 
         public OrdersController(IApplicationUserService userService)
         {
+            Guard.WhenArgument(userService, nameof(userService)).IsNull().Throw();
+
             this.userService = userService;
         }
 

@@ -27,7 +27,11 @@ namespace PizzaFactory.WebClient.Controllers
         private IApplicationUserService userService;
         private ICacheProvider cacheProvider;
 
-        public PizzaController(IPizzaService pizzaService, IIngredientService ingredientService, ICustomPizzaService customPizzaService, IApplicationUserService userService, ICacheProvider cacheProvider)
+        public PizzaController(IPizzaService pizzaService,
+            IIngredientService ingredientService,
+            ICustomPizzaService customPizzaService,
+            IApplicationUserService userService,
+            ICacheProvider cacheProvider)
         {
             Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
             Guard.WhenArgument(ingredientService, nameof(ingredientService)).IsNull().Throw();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Bytes2you.Validation;
+using Microsoft.AspNet.Identity;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.WebClient.Models;
 using System;
@@ -15,6 +16,8 @@ namespace PizzaFactory.WebClient.Controllers
 
         public PurchaseController(IApplicationUserService userService)
         {
+            Guard.WhenArgument(userService, nameof(userService)).IsNull().Throw();
+
             this.userService = userService;
         }
 
@@ -52,7 +55,7 @@ namespace PizzaFactory.WebClient.Controllers
             });
             responseTask.Wait();
 
-            if (isSaved>0)
+            if (isSaved > 0)
             {
                 return Json(new { message = "Successful order!", success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -60,7 +63,7 @@ namespace PizzaFactory.WebClient.Controllers
             {
                 return Json(new { message = "Order failed", success = false }, JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         public JsonResult RemoveFromCart(string productId)
