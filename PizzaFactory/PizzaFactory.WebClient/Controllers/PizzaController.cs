@@ -5,6 +5,7 @@ using PagedList;
 using PizzaFactory.Authentication;
 using PizzaFactory.Service;
 using PizzaFactory.Service.Contracts;
+using PizzaFactory.Service.Helpers;
 using PizzaFactory.Service.Models;
 using PizzaFactory.WebClient.Helpers.Contracts;
 using PizzaFactory.WebClient.Models;
@@ -26,24 +27,28 @@ namespace PizzaFactory.WebClient.Controllers
         private ICustomPizzaService customPizzaService;
         private IApplicationUserService userService;
         private ICacheProvider cacheProvider;
+        private IValidator validator;
 
         public PizzaController(IPizzaService pizzaService,
             IIngredientService ingredientService,
             ICustomPizzaService customPizzaService,
             IApplicationUserService userService,
-            ICacheProvider cacheProvider)
+            ICacheProvider cacheProvider,
+            IValidator validator)
         {
             Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
             Guard.WhenArgument(ingredientService, nameof(ingredientService)).IsNull().Throw();
             Guard.WhenArgument(customPizzaService, nameof(customPizzaService)).IsNull().Throw();
             Guard.WhenArgument(userService, nameof(userService)).IsNull().Throw();
             Guard.WhenArgument(cacheProvider, nameof(cacheProvider)).IsNull().Throw();
+            Guard.WhenArgument(validator, nameof(validator)).IsNull().Throw();
 
             this.ingredientService = ingredientService;
             this.pizzaService = pizzaService;
             this.customPizzaService = customPizzaService;
             this.userService = userService;
             this.cacheProvider = cacheProvider;
+            this.validator = validator;
         }
 
         [AllowAnonymous]
@@ -66,7 +71,7 @@ namespace PizzaFactory.WebClient.Controllers
                 });
             }
 
-            return View(pizzaModels);
+            return this.View(pizzaModels);
         }
 
         [HttpGet]
@@ -84,7 +89,7 @@ namespace PizzaFactory.WebClient.Controllers
 
             ViewBag.Items = new SelectList(ingredients, "ID", "Name");
 
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -97,27 +102,15 @@ namespace PizzaFactory.WebClient.Controllers
                 Ingredients = pizza.Ingredients
             });
 
-            return Redirect("~/Pizza/Choice");
+            return this.RedirectToAction("Choice");
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Custom(int page = 1, int pageSize = 10)
         {
-            if (pageSize > 10)
-            {
-                pageSize = 10;
-            }
-
-            if (pageSize < 1)
-            {
-                pageSize = 1;
-            }
-
-            if (page < 1)
-            {
-                page = 1;
-            }
+            page = this.validator.ValidatePage(page);
+            pageSize = this.validator.ValidatePageSize(pageSize);
 
             int count;
 

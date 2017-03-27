@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MSTestExtensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MSTestExtensions;
 using PizzaFactory.Service.Contracts;
-using PizzaFactory.WebClient.Helpers.Contracts;
-using PizzaFactory.WebClient.Controllers;
 using PizzaFactory.Service.Helpers;
+using PizzaFactory.WebClient.Controllers;
+using PizzaFactory.WebClient.Helpers.Contracts;
+using TestStack.FluentMVCTesting;
 
 namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
 {
     [TestClass]
-    public class Constructor_Should : BaseTest
+    public class AddToCart_Should : BaseTest
     {
         [TestMethod]
-        public void ReturnAnInstance_WhenParametersAreNotNull()
+        public void ReturnJsonResult_WhenCalled()
         {
             // Arrange
             var pizzaServiceMock = new Mock<IPizzaService>();
@@ -27,6 +23,7 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
             var cacheProviderMock = new Mock<ICacheProvider>();
             var validatorMock = new Mock<IValidator>();
 
+
             PizzaController controller = new PizzaController(
                 pizzaServiceMock.Object,
                 ingredientServiceMock.Object,
@@ -35,14 +32,8 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
                 cacheProviderMock.Object,
                 validatorMock.Object);
 
-            Assert.IsNotNull(controller);
-        }
-
-        [TestMethod]
-        public void ThrowException_WhenParametersAreNull()
-        {
-            // Arrange & Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new PizzaController(null, null, null, null, null, null));
+            // Act & Assert
+            controller.WithCallTo(c => c.AddToCart(string.Empty)).ShouldReturnJson();
         }
     }
 }

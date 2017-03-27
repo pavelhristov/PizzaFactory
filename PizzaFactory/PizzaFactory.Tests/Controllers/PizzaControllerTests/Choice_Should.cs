@@ -2,6 +2,7 @@
 using Moq;
 using MSTestExtensions;
 using PizzaFactory.Service.Contracts;
+using PizzaFactory.Service.Helpers;
 using PizzaFactory.Service.Models;
 using PizzaFactory.Tests.Helpers;
 using PizzaFactory.WebClient.Controllers;
@@ -28,6 +29,7 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
             var customPizzaServiceMock = new Mock<ICustomPizzaService>();
             var userServiceMock = new Mock<IApplicationUserService>();
             var cacheProviderMock = new Mock<ICacheProvider>();
+            var validatorMock = new Mock<IValidator>();
 
             var pizzas = Helper.GetPizzas().Select(p => new PizzaModel(p));
 
@@ -37,7 +39,8 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
                 ingredientServiceMock.Object,
                 customPizzaServiceMock.Object,
                 userServiceMock.Object,
-                cacheProviderMock.Object);
+                cacheProviderMock.Object,
+                validatorMock.Object);
 
             // Act & Assert
             controller
@@ -68,6 +71,7 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
             var customPizzaServiceMock = new Mock<ICustomPizzaService>();
             var userServiceMock = new Mock<IApplicationUserService>();
             var cacheProviderMock = new Mock<ICacheProvider>();
+            var validatorMock = new Mock<IValidator>();
 
             var pizzas = Helper.GetPizzas().Select(p => new PizzaModel(p));
 
@@ -77,7 +81,8 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
                 ingredientServiceMock.Object,
                 customPizzaServiceMock.Object,
                 userServiceMock.Object,
-                cacheProviderMock.Object);
+                cacheProviderMock.Object,
+                validatorMock.Object);
 
             // Act & Assert
             controller

@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MSTestExtensions;
+﻿using MSTestExtensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using PizzaFactory.Service.Contracts;
+using Moq;
 using PizzaFactory.WebClient.Helpers.Contracts;
-using PizzaFactory.WebClient.Controllers;
 using PizzaFactory.Service.Helpers;
+using PizzaFactory.WebClient.Controllers;
+using TestStack.FluentMVCTesting;
+using PagedList;
+using PizzaFactory.WebClient.Models;
 
 namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
 {
     [TestClass]
-    public class Constructor_Should : BaseTest
+    public class Custom_Should : BaseTest
     {
         [TestMethod]
-        public void ReturnAnInstance_WhenParametersAreNotNull()
+        public void ReturnDefaultView_WithIPagedListOfListCustomPizzaViewModels_WhenCalled()
         {
             // Arrange
             var pizzaServiceMock = new Mock<IPizzaService>();
@@ -25,7 +23,8 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
             var customPizzaServiceMock = new Mock<ICustomPizzaService>();
             var userServiceMock = new Mock<IApplicationUserService>();
             var cacheProviderMock = new Mock<ICacheProvider>();
-            var validatorMock = new Mock<IValidator>();
+            var validator = new Validator();
+
 
             PizzaController controller = new PizzaController(
                 pizzaServiceMock.Object,
@@ -33,16 +32,15 @@ namespace PizzaFactory.Tests.Controllers.PizzaControllerTests
                 customPizzaServiceMock.Object,
                 userServiceMock.Object,
                 cacheProviderMock.Object,
-                validatorMock.Object);
+                validator);
 
-            Assert.IsNotNull(controller);
-        }
-
-        [TestMethod]
-        public void ThrowException_WhenParametersAreNull()
-        {
-            // Arrange & Act & Assert
-            Assert.Throws<ArgumentNullException>(() => new PizzaController(null, null, null, null, null, null));
+            int page = 1;
+            int pageSize = 10;
+            // Act & Assert
+            controller
+                .WithCallTo(c => c.Custom(page, pageSize))
+                .ShouldRenderDefaultView()
+                .WithModel<IPagedList<ListCustomPizzaViewModel>>();
         }
     }
 }
