@@ -50,26 +50,7 @@ namespace PizzaFactory.Service
         public IEnumerable<BasePizzaModel> UserCart(string userId)
         {
             ApplicationUser user = this.userContext.Users.Find(userId);
-            List<BasePizzaModel> pizzaList = new List<BasePizzaModel>();
-
-            foreach (var item in user.Cart)
-            {
-                var pizza = new BasePizzaModel();
-                pizza.Id = item.Id;
-
-                if (item.CustomPizza != null)
-                {
-                    pizza.Name = item.CustomPizza.Name;
-                    pizza.Price = item.CustomPizza.Price;
-                }
-                else if (item.OurPizza != null)
-                {
-                    pizza.Name = item.OurPizza.Name;
-                    pizza.Price = item.OurPizza.Price;
-                }
-
-                pizzaList.Add(pizza);
-            }
+            IEnumerable<BasePizzaModel> pizzaList = this.mapper.FromBasePizzas(user.Cart);
 
             return pizzaList;
         }

@@ -115,6 +115,7 @@
     <Compile Include="Services\ApplicationUserServiceTests\ConfirmOrder_Should.cs" />
     <Compile Include="Services\ApplicationUserServiceTests\GetAllOrdersWithPaging_Should.cs" />
     <Compile Include="Services\ApplicationUserServiceTests\RemoveFromCart_Should.cs" />
+    <Compile Include="Services\ApplicationUserServiceTests\UserCart_Should.cs" />
     <Compile Include="Services\CustomPizzaServiceTests\Create_Should.cs" />
     <Compile Include="Services\CustomPizzaServiceTests\GetAllWithPaging_Should.cs" />
     <Compile Include="Services\IngredientServiceTests\GetAll_Should.cs" />
