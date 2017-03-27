@@ -95,8 +95,7 @@ namespace PizzaFactory.Tests.Services.CustomPizzaServiceTests
             // Assert
             Assert.AreEqual(pizzas.Count(), count);
         }
-
-
+        
         [TestMethod]
         public void ReturnCollection_WithPageSizeNumberOfItems_WhenCalled()
         {
@@ -122,7 +121,7 @@ namespace PizzaFactory.Tests.Services.CustomPizzaServiceTests
         }
 
         [TestMethod]
-        public void ReturnCollection_WithForTheProvidedPage_OrderedByName_WhenCalled()
+        public void ReturnCollection_ForTheProvidedPage_OrderedByName_WhenCalled()
         {
             // Arrange
             IEnumerable<CustomPizza> pizzas = Helper.GetCustomPizzas();

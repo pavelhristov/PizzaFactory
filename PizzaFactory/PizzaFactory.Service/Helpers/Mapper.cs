@@ -64,5 +64,44 @@ namespace PizzaFactory.Service.Helpers
 
             return basePizza;
         }
+
+        public IEnumerable<OrderModel> FromOrders(IEnumerable<Order> orders)
+        {
+            var orderModels = new List<OrderModel>();
+
+            foreach (var item in orders)
+            {
+                var pizzaList = new List<string>();
+                decimal price = 0M;
+
+                foreach (var pizza in item.Pizzas)
+                {
+                    if (pizza.CustomPizza != null)
+                    {
+                        pizzaList.Add(pizza.CustomPizza.Name);
+                        price += pizza.CustomPizza.Price;
+                    }
+                    else if (pizza.OurPizza != null)
+                    {
+                        pizzaList.Add(pizza.OurPizza.Name);
+                        price += pizza.OurPizza.Price;
+                    }
+                }
+
+                var orderModel = new OrderModel()
+                {
+                    Id = item.Id,
+                    Address = item.Address,
+                    CreatedOn = item.CreatedOn,
+                    Pizzas = pizzaList,
+                    Price = price,
+                    User = item.Customer.Email
+                };
+
+                orderModels.Add(orderModel);
+            }
+
+            return orderModels;
+        }
     }
 }

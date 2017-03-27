@@ -11,5 +11,7 @@ namespace PizzaFactory.Service.Helpers
         ICollection<CustomPizzaModel> FromCustomPizzas(ICollection<CustomPizza> pizzas);
 
         BasePizza FromPizzaAndCustomPizza(Pizza pizza, CustomPizza customPizza);
+
+        IEnumerable<OrderModel> FromOrders(IEnumerable<Order> orders);
     }
 }

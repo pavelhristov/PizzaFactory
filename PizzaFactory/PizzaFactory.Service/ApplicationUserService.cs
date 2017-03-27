@@ -39,7 +39,7 @@ namespace PizzaFactory.Service
 
             var pizza = this.pizzaContext.Pizzas.Find(productId);
             var customPizza = this.pizzaContext.CustomPizzas.Find(productId);
-            
+
             var basePizza = this.mapper.FromPizzaAndCustomPizza(pizza, customPizza);
 
             user.Cart.Add(basePizza);
@@ -109,62 +109,16 @@ namespace PizzaFactory.Service
 
         public IEnumerable<OrderModel> GetAllOrdersWithPaging(out int count, int page = 1, int size = 10, Func<Order, object> sortBy = null)
         {
-            if (page < 1)
-            {
-                page = 1;
-            }
-
-            if (size < 1)
-            {
-                size = 1;
-            }
-
-            if (size > 10)
-            {
-                size = 10;
-            }
+            page = this.validator.ValidatePage(page);
+            size = this.validator.ValidatePageSize(size);
 
             if (sortBy == null)
             {
                 sortBy = cp => cp.CreatedOn;
             }
 
-
             var orders = this.orderContext.Orders.OrderByDescending(sortBy).Skip(size * (page - 1)).Take(size).ToList();
-            var orderModels = new List<OrderModel>();
-
-            foreach (var item in orders)
-            {
-                var pizzaList = new List<string>();
-                decimal price = 0M;
-
-                foreach (var pizza in item.Pizzas)
-                {
-                    if (pizza.CustomPizza != null)
-                    {
-                        pizzaList.Add(pizza.CustomPizza.Name);
-                        price += pizza.CustomPizza.Price;
-                    }
-                    else if (pizza.OurPizza != null)
-                    {
-                        pizzaList.Add(pizza.OurPizza.Name);
-                        price += pizza.OurPizza.Price;
-                    }
-                }
-
-                var orderModel = new OrderModel()
-                {
-                    Id = item.Id,
-                    Address = item.Address,
-                    CreatedOn = item.CreatedOn,
-                    Pizzas = pizzaList,
-                    Price = price,
-                    User = item.Customer.Email
-                };
-
-                orderModels.Add(orderModel);
-            }
-
+            var orderModels = this.mapper.FromOrders(orders);
 
             count = orderContext.Orders.Count();
             return orderModels;
