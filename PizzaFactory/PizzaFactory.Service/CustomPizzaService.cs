@@ -37,24 +37,25 @@ namespace PizzaFactory.Service
         }
 
         // DEPRECATED
-        //public IEnumerable<CustomPizzaModel> GetAll()
-        //{
-        //    var pizzas = this.pizzaContext.CustomPizzas.ToList();
-        //    var customPizzaModels = new List<CustomPizzaModel>();
+        public IEnumerable<CustomPizzaModel> GetAll()
+        {
+            var pizzas = this.pizzaContext.CustomPizzas.ToList();
+            var customPizzaModels = new List<CustomPizzaModel>();
 
-        //    foreach (var item in pizzas)
-        //    {
-        //        customPizzaModels.Add(new CustomPizzaModel()
-        //        {
-        //            Name = item.Name,
-        //            Price = item.Price,
-        //            Ingredients = item.Ingredients.Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price }).ToList(),
-        //            Description = item.Description
-        //        });
-        //    }
+            foreach (var item in pizzas)
+            {
+                customPizzaModels.Add(new CustomPizzaModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Price = item.Price,
+                    Ingredients = item.Ingredients.Select(i => new IngredientModel() { Id = i.Id, Name = i.Name, Price = i.Price }).ToList(),
+                    Description = item.Description
+                });
+            }
 
-        //    return customPizzaModels;
-        //}
+            return customPizzaModels;
+        }
 
         public IEnumerable<CustomPizzaModel> GetAllWithPaging(out int count, int page = 1, int size = 10, Func<CustomPizza, object> sortBy = null)
         {
