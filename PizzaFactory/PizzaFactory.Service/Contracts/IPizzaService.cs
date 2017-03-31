@@ -8,6 +8,6 @@ namespace PizzaFactory.Service.Contracts
     {
         IEnumerable<PizzaModel> GetAll();
 
-        //PizzaModel GetById(Guid id);
+        PizzaModel GetById(Guid id);
     }
 }

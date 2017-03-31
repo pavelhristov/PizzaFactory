@@ -13,5 +13,7 @@ namespace PizzaFactory.Service.Contracts
         IEnumerable<CustomPizzaModel> GetAll();
 
         IEnumerable<CustomPizzaModel> GetAllWithPaging(out int count, int page = 1, int size = 10, Func<CustomPizza, object> sortBy = null);
+
+        CustomPizzaModel GetById(Guid id);
     }
 }

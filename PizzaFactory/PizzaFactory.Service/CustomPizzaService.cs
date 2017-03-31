@@ -74,5 +74,30 @@ namespace PizzaFactory.Service
 
             return customPizzaModels;
         }
+
+        public CustomPizzaModel GetById(Guid id)
+        {
+            var pizza = this.pizzaContext.CustomPizzas.Find(id);
+            var ingredients = new List<IngredientModel>();
+            foreach (var item in pizza.Ingredients)
+            {
+                ingredients.Add(new IngredientModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Price = item.Price
+                });
+            }
+            var customPizza = new CustomPizzaModel()
+            {
+                Id = pizza.Id,
+                Name = pizza.Name,
+                Description = pizza.Description,
+                Ingredients = ingredients,
+                Price = pizza.Price
+            };
+            
+            return customPizza;
+        }
     }
 }
