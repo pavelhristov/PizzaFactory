@@ -1,9 +1,12 @@
 ﻿using Bytes2you.Validation;
+using Microsoft.AspNet.Identity.Owin;
+using PizzaFactory.Authentication;
 using PizzaFactory.Service.Contracts;
 using PizzaFactory.WebClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,14 +16,17 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
     {
         private ICustomPizzaService customPizzaService;
         private IPizzaService pizzaService;
+        private IApplicationUserService userService;
 
-        public PizzasController(IPizzaService pizzaService, ICustomPizzaService customPizzaService)
+        public PizzasController(IPizzaService pizzaService, ICustomPizzaService customPizzaService, IApplicationUserService userService)
         {
             Guard.WhenArgument(pizzaService, nameof(pizzaService)).IsNull().Throw();
             Guard.WhenArgument(customPizzaService, nameof(customPizzaService)).IsNull().Throw();
+            Guard.WhenArgument(userService, nameof(userService)).IsNull().Throw();
 
             this.pizzaService = pizzaService;
             this.customPizzaService = customPizzaService;
+            this.userService = userService;
         }
 
         // GET: Api/Pizzas
@@ -77,6 +83,20 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
             };
 
             return Json(new { data = customPizzaViewModel, success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AddToCart(string userId, string pizzaId)
+        {
+            int isSaved = 0;
+
+            Task responseTask = Task.Run(() =>
+            {
+                isSaved = this.userService.AddToCart(userId, Guid.Parse(pizzaId));
+            });
+
+            responseTask.Wait();
+
+            return Json(new { }, JsonRequestBehavior.AllowGet);
         }
     }
 }
