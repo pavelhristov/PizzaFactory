@@ -46,7 +46,7 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
         {
             var pizza = this.pizzaService.GetById(Guid.Parse(id));
 
-            return Json(new { pizza }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = pizza, success = true }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Custom()
@@ -96,7 +96,14 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
 
             responseTask.Wait();
 
-            return Json(new { }, JsonRequestBehavior.AllowGet);
+            if (isSaved > 0)
+            {
+                return Json(new { message = "Successfully added to cart!", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
