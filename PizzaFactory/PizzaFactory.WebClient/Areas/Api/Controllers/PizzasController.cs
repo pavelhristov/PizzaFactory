@@ -17,6 +17,7 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
         private ICustomPizzaService customPizzaService;
         private IPizzaService pizzaService;
         private IApplicationUserService userService;
+        private string userId = "31d7edae-377c-4566-b849-c95f468d2c39";
 
         public PizzasController(IPizzaService pizzaService, ICustomPizzaService customPizzaService, IApplicationUserService userService)
         {
@@ -85,13 +86,13 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
             return Json(new { data = customPizzaViewModel, success = true }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult AddToCart(string userId, string pizzaId)
+        public JsonResult AddToCart(string pizzaId)
         {
             int isSaved = 0;
 
             Task responseTask = Task.Run(() =>
             {
-                isSaved = this.userService.AddToCart(userId, Guid.Parse(pizzaId));
+                isSaved = this.userService.AddToCart(this.userId, Guid.Parse(pizzaId));
             });
 
             responseTask.Wait();
@@ -102,8 +103,49 @@ namespace PizzaFactory.WebClient.Areas.Api.Controllers
             }
             else
             {
-                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+                return Json(new { message = "Failed to add to cart!", success = false }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public JsonResult RemoveFromCart(string pizzaId)
+        {
+            int isSaved = 0;
+
+            Task responseTask = Task.Run(() =>
+            {
+                isSaved = this.userService.RemoveFromCart(this.userId, Guid.Parse(pizzaId));
+            });
+
+            responseTask.Wait();
+
+            if (isSaved > 0)
+            {
+                return Json(new { message = "Successfully removed from cart!", success = true }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { message = "Failed to remove from cart!", success = false }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult ShowCart()
+        {
+            var cart = this.userService.UserCart(this.userId);
+
+            return Json(new { data = cart, success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Order(string address)
+        {
+            if (string.IsNullOrWhiteSpace(address))
+            {
+                return Json(new { message = "Order failed, address missing!", success = false }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            this.userService.ConfirmOrder(this.userId, address);
+
+            return Json(new { message = "Order successful!", success = true }, JsonRequestBehavior.AllowGet);
         }
     }
 }

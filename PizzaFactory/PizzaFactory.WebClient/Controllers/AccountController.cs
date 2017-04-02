@@ -90,55 +90,6 @@ namespace PizzaFactory.WebClient.Controllers
             }
         }
 
-        // Most terrible login ever created. Must refactor. Totally aware its wrong on so many levels.
-        [AllowAnonymous]
-        [Route("Api/Login")]
-        public async Task<JsonResult> LoginApi(string email, string password)
-        {
-            var result = await SignInManager.PasswordSignInAsync(email, password, true, shouldLockout: false);
-
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    string userId = (await this.UserManager.FindByEmailAsync(email)).Id;
-                    //string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                    return Json(new { data = userId, message = "login successful", success = true }, JsonRequestBehavior.AllowGet);
-                case SignInStatus.LockedOut:
-                    return Json(new { message = "login failed: account is locked", success = false }, JsonRequestBehavior.AllowGet);
-                case SignInStatus.RequiresVerification:
-                    return Json(new { message = "login failed: requires verification", success = false }, JsonRequestBehavior.AllowGet);
-                case SignInStatus.Failure:
-                default:
-                    return Json(new { message = "login failed", success = false }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        [AllowAnonymous]
-        public async Task<JsonResult> RegisterApi(string email, string password)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = email, Email = email };
-                var result = await UserManager.CreateAsync(user, password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    return Json(new { message = "Registration successful!", success = true }, JsonRequestBehavior.AllowGet);
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return Json(new { message = "Registration failed!", success = false }, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult LogOffApi()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return Json(new { message = "Logoff successful!", success = true }, JsonRequestBehavior.AllowGet);
-        }
-
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
